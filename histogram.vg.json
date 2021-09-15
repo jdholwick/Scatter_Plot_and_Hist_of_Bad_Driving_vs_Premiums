@@ -1,0 +1,166 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A histogram of car insurance premiums.",
+  "width": 600,
+  "height":300,
+  "padding": 5,
+  "autosize": {"type": "fit", "resize": true},
+
+  "signals": [
+    {
+      "name": "Max State Premium Bins ", "value": 15,
+      "bind": {"input": "select", "options": [3, 5, 10, 15]}
+    },
+    {
+      "name": "binCount",
+      "update": "(bins.stop - bins.start) / bins.step"
+    },
+    {
+      "name": "nullGap", "value": 10
+    },
+    {
+      "name": "barStep",
+      "update": "(width - nullGap) / (1 + binCount)"
+    }
+  ],
+
+  "data": [
+    {
+      "name": "table",
+      "url": "data/bad-drivers_json.json",
+      "transform": [
+        {
+          "type": "extent", "field": "car insurance premiums ($)",
+          "signal": "extent"
+        },
+        {
+          "type": "bin", "signal": "bins",
+          "field": "car insurance premiums ($)", "extent": {"signal": "extent"},
+          "maxbins": {"signal": "Max State Premium Bins "}
+        }
+      ]
+    },
+    {
+      "name": "counts",
+      "source": "table",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['car insurance premiums ($)'] != null"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["bin0", "bin1"]
+        }
+      ]
+    },
+    {
+      "name": "nulls",
+      "source": "table",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['car insurance premiums ($)'] == null"
+        },
+        {
+          "type": "aggregate"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "yscale",
+      "type": "linear",
+      "range": "height",
+      "round": true, "nice": true,
+      "domain": {
+        "fields": [
+          {"data": "counts", "field": "count"},
+          {"data": "nulls", "field": "count"}
+        ]
+      }
+    },
+    {
+      "name": "xscale",
+      "type": "linear",
+      "range": [{"signal": "barStep + nullGap"}, {"signal": "width"}],
+      "round": true,
+      "domain": {"signal": "[bins.start, bins.stop]"},
+      "bins": {"signal": "bins"}
+    },
+    {
+      "name": "xscale-null",
+      "type": "band",
+      "range": [0, {"signal": "barStep"}],
+      "round": true,
+      "domain": [null]
+    }
+  ],
+
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "tickMinStep": 0.5,
+      "title": "Insurance Premiums in Dollars",
+      "titleFontSize": 14,
+      "titleFontWeight": 1,
+      "titleOpacity": 0.8,
+      "titlePadding": 10,
+      "labelFontSize": 12
+    },
+    {
+      "orient": "bottom",
+      "scale": "xscale-null"
+    },
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "tickCount": 5,
+      "title": "Number of States",
+      "titleFontSize": 14,
+      "titleFontWeight": 1,
+      "titleOpacity": 0.8,
+      "titlePadding": 10,
+      "offset": 5,
+      "labelFontSize": 12
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "counts"},
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale", "field": "bin0", "offset": 5},
+          "x2": {"scale": "xscale", "field": "bin1"},
+          "y": {"scale": "yscale", "field": "count"},
+          "y2": {"scale": "yscale", "value": 0},
+          "fill": {"value": "sienna"}
+        },
+        "hover": {
+          "fill": {"value": "#FF8000"}
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "nulls"},
+      "encode": {
+        "update": {
+          "x": {"scale": "xscale-null", "value": null, "offset": 1},
+          "x2": {"scale": "xscale-null", "band": 1},
+          "y": {"scale": "yscale", "field": "count"},
+          "y2": {"scale": "yscale", "value": 0},
+          "fill": {"value": "#aaa"}
+        },
+        "hover": {
+          "fill": {"value": "#FF8000"}
+        }
+      }
+    }
+  ]
+}

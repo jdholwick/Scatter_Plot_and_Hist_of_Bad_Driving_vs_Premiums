@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@5"></script>
+    <title>Scatter Plot and Histogram Hypothesis Concerning Driver Carelessness and Insurance Premiums</title>
+</head>
+<body>
+<p><h2>Hypothesis: Driver carelessness and insurance premium rates are not clearly connected as one might expect.</h2></p>
+<br>
+<br>
+
+<div id="vis1"></div>
+
+<script>
+    const spec1 = "scatter.vg.json";
+    vegaEmbed("#vis1", spec1)
+        // result.view provides access to the Vega View API
+        .then(result => console.log(result))
+        .catch(console.warn);
+</script>
+
+<div id="vis2"></div>
+
+<script>
+    const spec2 = "histogram.vg.json";
+    vegaEmbed("#vis2", spec2)
+        // result.view provides access to the Vega View API
+        .then(result => console.log(result))
+        .catch(console.warn);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Scatter concerning driver carelessness and insurance premiums.",
+  "width": 400,
+  "height": 300,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "source",
+      "url": "data/bad-drivers_json.json",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['percentage of drivers involved in fatal collisions who were speeding'] != null && datum['percentage of drivers involved in fatal collisions who were alcohol-impaired'] != null && datum['car insurance premiums ($)'] != null"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "x",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": false,
+      "domain": {"data": "source", "field": "percentage of drivers involved in fatal collisions who were speeding"},
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": false,
+      "domain": {"data": "source", "field": "percentage of drivers involved in fatal collisions who were alcohol-impaired"},
+      "range": "height"
+    },
+    {
+      "name": "size",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": false,
+      "domain": {"data": "source", "field": "car insurance premiums ($)"},
+      "range": [0,800]
+    }
+  ],
+
+  "axes": [
+    {
+      "scale": "x",
+      "grid": true,
+      "domain": false,
+      "orient": "bottom",
+      "tickCount": 5,
+      "labelFontSize": 12,
+      "titleOpacity": 0.8,
+      "titleFontSize": 14,
+      "titleFontWeight": 1,
+      "titlePadding": 10,
+      "title": "Percentage of Drivers Involved -- Speeding"
+    },
+    {
+      "scale": "y",
+      "grid": true,
+      "domain": false,
+      "orient": "left",
+      "tickCount": 5,
+      "labelFontSize": 12,
+      "titleOpacity": 0.8,
+      "titleFontSize": 14,
+      "titleFontWeight": 1,
+      "titlePadding": 10,
+      "title": "Percentage of Drivers Involved -- Alcohol-Impaired"
+    }
+  ],
+
+  "legends": [
+    {
+      "size": "size",
+      "labelFontSize": 12,
+      "title": "Insur. Premiums in Dollars",
+      "titleFontSize": 14,
+      "titleFontWeight": 1,
+      "titleOpacity": 0.8,
+      "format": "s",
+      "orient": "right",
+      "symbolStrokeColor": "#E18F24",
+      "symbolStrokeWidth": 2,
+      "symbolOpacity": 100,
+      "symbolType": "circle"
+    }
+  ],
+
+  "marks": [
+    {
+      "name": "marks",
+      "type": "symbol",
+      "from": {"data": "source"},
+      "encode": {
+        "update": {
+          "x": {"scale": "x", "field": "percentage of drivers involved in fatal collisions who were speeding"},
+          "y": {"scale": "y", "field": "percentage of drivers involved in fatal collisions who were alcohol-impaired"},
+          "size": {"scale": "size", "field": "car insurance premiums ($)"},
+          "shape": {"value": "circle"},
+          "strokeWidth": {"value": 2},
+          "opacity": {"value": 100},
+          "stroke": {"value": "#E18F24"},
+          "fill": {"value": "transparent"}
+        }
+      }
+    }
+  ]
+}
