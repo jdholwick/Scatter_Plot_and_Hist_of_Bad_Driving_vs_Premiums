@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Scatter concerning driver carelessness and insurance premiums.",
-  "width": 450,
+  "width": 500,
   "height": 350,
   "padding": 5,
 
@@ -81,7 +81,7 @@
     {
       "size": "size",
       "labelFontSize": 14,
-      "title": "Insur. Premiums in Dollars",
+      "title": "Insur. Premiums ($)",
       "titleFontSize": 16,
       "titleFontWeight": 1,
       "titleOpacity": 0.8,
