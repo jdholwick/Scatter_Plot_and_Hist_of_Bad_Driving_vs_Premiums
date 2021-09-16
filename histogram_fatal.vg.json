@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A histogram of fatal crashes per billion miles.",
-  "width": 600,
-  "height":300,
+  "width": 425,
+  "height":150,
   "padding": 5,
   "autosize": {"type": "fit", "resize": true},
 

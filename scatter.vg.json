@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Scatter concerning driver carelessness and insurance premiums.",
-  "width": 400,
-  "height": 300,
+  "width": 450,
+  "height": 350,
   "padding": 5,
 
   "data": [
@@ -55,11 +55,11 @@
       "domain": false,
       "orient": "bottom",
       "tickCount": 5,
-      "labelFontSize": 12,
+      "labelFontSize": 14,
       "titleOpacity": 0.8,
-      "titleFontSize": 14,
+      "titleFontSize": 16,
       "titleFontWeight": 1,
-      "titlePadding": 10,
+      "titlePadding": 12,
       "title": "Percentage of Drivers Involved -- Speeding"
     },
     {
@@ -68,11 +68,11 @@
       "domain": false,
       "orient": "left",
       "tickCount": 5,
-      "labelFontSize": 12,
+      "labelFontSize": 14,
       "titleOpacity": 0.8,
-      "titleFontSize": 14,
+      "titleFontSize": 16,
       "titleFontWeight": 1,
-      "titlePadding": 10,
+      "titlePadding": 12,
       "title": "Percentage of Drivers Involved -- Alcohol-Impaired"
     }
   ],
@@ -80,9 +80,9 @@
   "legends": [
     {
       "size": "size",
-      "labelFontSize": 12,
+      "labelFontSize": 14,
       "title": "Insur. Premiums in Dollars",
-      "titleFontSize": 14,
+      "titleFontSize": 16,
       "titleFontWeight": 1,
       "titleOpacity": 0.8,
       "format": "s",
