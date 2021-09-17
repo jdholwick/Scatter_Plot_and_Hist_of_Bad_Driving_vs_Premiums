@@ -76,7 +76,7 @@
     </tr>
 
     <tr>
-        <td colspan="2">
+        <td>
             <br>
             <br>
             <div id="vis4"></div>
@@ -84,6 +84,20 @@
             <script>
                 const spec4 = "histogram_fatal_2.vg.json";
                 vegaEmbed("#vis4", spec4)
+                    // result.view provides access to the Vega View API
+                    .then(result => console.log(result))
+                    .catch(console.warn);
+            </script>
+        </td>
+
+        <td>
+            <br>
+            <br>
+            <div id="vis5"></div>
+
+            <script>
+                const spec5 = "scatter_2.vg.json";
+                vegaEmbed("#vis5", spec5)
                     // result.view provides access to the Vega View API
                     .then(result => console.log(result))
                     .catch(console.warn);

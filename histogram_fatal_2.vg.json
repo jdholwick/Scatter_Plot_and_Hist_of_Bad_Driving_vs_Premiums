@@ -46,7 +46,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum['number of drivers involved in fatal collisions per billion miles'] != null"
+          "expr": "datum['number of drivers involved in fatal collisions per billion miles'] > 15"
         },
         {
           "type": "aggregate",

@@ -111,6 +111,18 @@
           "fill": {"value": "transparent"}
         }
       }
+    },
+
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {"value": 200},
+          "y": {"value": 200},
+          "text": {"value": "Graph Block"}
+        }
+      }
     }
+
   ]
 }
